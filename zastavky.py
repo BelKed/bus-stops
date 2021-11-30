@@ -10,7 +10,7 @@ canvas.pack()
 
 f = open("zastavky.txt", "r", encoding="Windows-1250")
 lines = f.readlines()
-line = lines[0].strip() + " "
+line = lines[0].strip()
 
 canvas.create_text(x, y, text="░" * characters, fill="#185566", font=("JetBrains Mono", 30))
 
@@ -29,18 +29,18 @@ def draw():
 
     text_pos += 1
 
-    if text_pos > len(line):
+    if text_pos > len(line) + 1:
         text_pos = 0
 
 
 def keypress(_):
     global lines, line, i, text_pos
 
-    line = lines[i].strip() + " "
+    line = lines[i].strip()
     text_pos = 0
 
-    if (line == lines[-1].strip() + " "):
-        line += "| KONEČNÁ ZASTÁVKA "
+    if (line == lines[-1].strip()):
+        line += " | KONEČNÁ ZASTÁVKA"
     else:
         i += 1
 
