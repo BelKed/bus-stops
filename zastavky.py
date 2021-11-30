@@ -1,6 +1,6 @@
 import tkinter
 
-canvas = tkinter.Canvas(bg="blue", width=800, height=100)
+canvas = tkinter.Canvas(bg="#282c34", width=800, height=100)
 canvas.pack()
 
 f = open("zastavky.txt", "r", encoding="Windows-1250")
@@ -16,7 +16,7 @@ def draw():
     global text, text_element
 
     canvas.delete(text_element)
-    text_element = canvas.create_text(x, y, text=text, fill="yellow", font="Arial 30")
+    text_element = canvas.create_text(x, y, text=text, fill="#32b1d3", font=("JetBrains Mono", 30))
     p = text[0]
     text = text[1:]
     text = text + p
