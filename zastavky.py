@@ -1,36 +1,35 @@
 import tkinter
 
-pl = tkinter.Canvas(bg='blue', width=800, height=100)
-pl.pack()
+canvas = tkinter.Canvas(bg="blue", width=800, height=100)
+canvas.pack()
 
-su = open('zastavky.txt', 'r', encoding='Windows-1250')
-veta = su.readline().strip() + ' '
+f = open("zastavky.txt", "r", encoding="Windows-1250")
+text = f.readline().strip() + " "
 
-print(veta)
+print(text)
 
-ve = 0
+text_element = 0
 x, y = 400, 50
 
 
-def rotuj():
-    global ve, veta
+def draw():
+    global text, text_element
 
-    pl.delete(ve)
-    ve = pl.create_text(x, y, text=veta, fill='yellow', font='Arial 30')
-
-    p = veta[0]
-    veta = veta[1:]
-    veta = veta + p
-
-
-def citaj(event):
-    global veta
-    veta = su.readline().strip() + ' '
+    canvas.delete(text_element)
+    text_element = canvas.create_text(x, y, text=text, fill="yellow", font="Arial 30")
+    p = text[0]
+    text = text[1:]
+    text = text + p
 
 
-pl.bind_all('<Key>', citaj)
+def keypress(_):
+    global text
+    text = f.readline().strip() + " "
+
+
+canvas.bind_all("<Key>", keypress)
 
 while True:
-    rotuj()
-    pl.after(200)
-    pl.update()
+    draw()
+    canvas.after(200)
+    canvas.update()
