@@ -3,7 +3,7 @@ import tkinter
 pl = tkinter.Canvas(bg='blue', width=800, height=100)
 pl.pack()
 
-su = open('zastavky.txt', 'r')
+su = open('zastavky.txt', 'r', encoding='Windows-1250')
 veta = su.readline().strip() + ' '
 
 print(veta)
