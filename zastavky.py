@@ -1,16 +1,18 @@
 import tkinter
 
-canvas = tkinter.Canvas(bg="#282c34", width=800, height=100)
+i = 1
+characters = 20
+text_element = text_pos = 0
+x, y = characters * 10, 50
+
+canvas = tkinter.Canvas(bg="#282c34", width=characters * 20, height=100)
 canvas.pack()
 
 f = open("zastavky.txt", "r", encoding="Windows-1250")
 lines = f.readlines()
 line = lines[0].strip() + " "
 
-characters = 20
-i = 1
-text_element = text_pos = 0
-x, y = 400, 50
+canvas.create_text(x, y, text="░" * characters, fill="#185566", font=("JetBrains Mono", 30))
 
 
 def draw():
@@ -20,6 +22,10 @@ def draw():
 
     canvas.delete(text_element)
     text_element = canvas.create_text(x, y, text=text, fill="#32b1d3", font=("JetBrains Mono", 30))
+
+    if text_pos == 0:
+        canvas.update()
+        canvas.after(300)
 
     text_pos += 1
 
