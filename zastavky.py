@@ -4,10 +4,10 @@ canvas = tkinter.Canvas(bg="blue", width=800, height=100)
 canvas.pack()
 
 f = open("zastavky.txt", "r", encoding="Windows-1250")
-text = f.readline().strip() + " "
+lines = f.readlines()
+text = lines[0].strip() + " "
 
-print(text)
-
+i = 1
 text_element = 0
 x, y = 400, 50
 
@@ -23,8 +23,14 @@ def draw():
 
 
 def keypress(_):
-    global text
-    text = f.readline().strip() + " "
+    global lines, text, i
+
+    text = lines[i].strip() + " "
+
+    if (text == lines[-1].strip() + " "):
+        text += "| KONEČNÁ ZASTÁVKA "
+    else:
+        i += 1
 
 
 canvas.bind_all("<Key>", keypress)
