@@ -1,8 +1,7 @@
 import tkinter
 
-i = 1
 characters = 20
-text_element = text_pos = 0
+i = text_element = 0
 x, y = characters * 10, 50
 
 canvas = tkinter.Canvas(bg="#282c34", width=characters * 20, height=100)
@@ -10,34 +9,41 @@ canvas.pack()
 
 f = open("zastavky.txt", "r", encoding="Windows-1250")
 lines = f.readlines()
-line = lines[0].strip()
 
 canvas.create_text(x, y, text="░" * characters, fill="#185566", font=("JetBrains Mono", 30))
 
 
 def draw():
-    global line, text_element, text_pos
+    global line, text_element, text_pos, first
 
-    text = line[text_pos:text_pos + characters].ljust(characters)
+    if text_pos < 0:
+        if characters + text_pos > len(line):
+            text = line.ljust(characters + text_pos).rjust(characters)
+        else:
+            text = line[0:characters + text_pos].rjust(characters)
+    else:
+        text = line[text_pos:text_pos + characters].ljust(characters)
 
     canvas.delete(text_element)
     text_element = canvas.create_text(x, y, text=text, fill="#32b1d3", font=("JetBrains Mono", 30))
 
-    if text_pos == 0:
-        canvas.update()
-        canvas.after(300)
+    if text_pos > len(line) - 2:
+        text_pos = -1 * characters
 
     text_pos += 1
 
-    if text_pos > len(line) + 1:
-        text_pos = 0
+    if first:
+        canvas.update()
+        canvas.after(300)
+        first = False
 
 
 def keypress(_):
-    global lines, line, i, text_pos
+    global lines, line, i, text_pos, first
 
     line = lines[i].strip()
     text_pos = 0
+    first = True
 
     if (line == lines[-1].strip()):
         line += " | KONEČNÁ ZASTÁVKA"
@@ -46,6 +52,7 @@ def keypress(_):
 
 
 canvas.bind_all("<Key>", keypress)
+keypress(None)
 
 while True:
     draw()
