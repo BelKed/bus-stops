@@ -14,7 +14,7 @@ canvas.create_text(x, y, text="░" * characters, fill="#185566", font=("JetBrai
 
 
 def draw():
-    global line, text_element, text_pos, first
+    global line, text_element, text_pos
 
     if text_pos < 0:
         if characters + text_pos > len(line):
@@ -32,18 +32,12 @@ def draw():
 
     text_pos += 1
 
-    if first:
-        canvas.update()
-        canvas.after(300)
-        first = False
-
 
 def keypress(_):
-    global lines, line, i, text_pos, first
+    global lines, line, i, text_pos
 
     line = lines[i].strip()
-    text_pos = 0
-    first = True
+    text_pos = -1 * characters + 1
 
     if (line == lines[-1].strip()):
         line += " | KONEČNÁ ZASTÁVKA"
