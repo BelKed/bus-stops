@@ -2,7 +2,7 @@
 
 <img align="right" width="300" src="./bus_stops.png">
 
-A simple app showing bus stops from file written in [Python](https://www.python.org) using the built-in [`tkinter`](https://docs.python.org/3/library/tkinter.html) library.
+A simple app for showing bus stops from file written in [Python](https://www.python.org) using the built-in [`tkinter`](https://docs.python.org/3/library/tkinter.html) library.
 
 ## Requirements
 
@@ -17,4 +17,4 @@ To start the app, download or clone this repository, and in the folder you downl
 $ python bus_stops.py
 ```
 
-You can move to the next bus stop by pressing any key on the keyboard.
+You can "move" to the next stop by pressing any key on the keyboard.
